@@ -132,10 +132,11 @@
 			* 易于操作
 			* 增加网络负担，每次打开需要加载这个字体
 		* 目的 先实现需求，再优化
-		* 字体兼容处理网站：
-			* 
-	3.2 新的UI样式
-		* 文本新增样式
+		* 字体兼容处理网站
+	       https://www.fontsquirrel.com/tools/webfont-generator
+	    * icomoon字体图标
+	       https://icomoon.io/#home
+	3.2 文本新增样式
 		**透明度
 			opacity：0~1 性能高，不是继承属性，但是可以影响后代元素
 			rgba：0~1
@@ -152,6 +153,101 @@
 			③ overflow：hidden隐藏
 			④ 包裹区域必须不能让子元素撑开
 			此三条必须同时使用，并且元素必须为block/inline-block
+	3.3 盒模型新增样式
+		（1） 盒模型倒影 --box-shadow
+		    * 默认值：none 
+		    * 继承性：不继承
+		    * 可设置多个阴影之间用“，”隔开
+		    * box-shadow:投影方式 X轴偏移量 Y轴偏移量 阴影模糊半径 阴影扩展半径 阴影颜色；
+				- 阴影类型：此参数可选。如不设值，默认投影方式是外阴影；如取其唯一值“inset”，其投影为内阴影；
+				- offset-x/y:阴影水平/垂直偏移量，其值可以是正负值。如果值为正值，则阴影在对象的右/下边，其值为负值时，阴影在对象的左/上边；
+				- 阴影模糊半径：此参数可选，但其值只能是为正值，如果其值为0时，表示阴影不具有模糊效果，其值越大阴影的边缘就越模糊；
+				- 阴影扩展半径：此参数可选，其值可以是正负值，如果值为正，则整个阴影都延展扩大，反之值为负值时，则缩小；
+				- 阴影颜色：此参数可选。如不设定颜色，浏览器会取默认色，但各浏览器默认取色不一致，特别是在webkit内核下的safari和chrome浏览器下表现为透明色，在Firefox/Opera下表现为黑色（已验证），建议不要省略此参数。
+		    * -moz-box-shadow --Firefox
+		    * -webkit-box-shadow -- chrome Safariand Google
+		（2） 倒影 ---webkit-box-reflect
+			* 不是css3的东西 -webkit内核
+			* 默认值：none
+			* 属性值顺序不能改变
+			* -webkit-box-reflect：方向 距离 渐变
+			   - 倒影的方向--above（倒上），below（倒下），right（倒右），left（倒左）##倒影在它的什么位置
+			   - 倒影的距离--倒影之间的间距 px/%
+		（3）resize -- 
+			* 控制一个元素的可调整大小
+			！！！ 一定要配合overflow：auto
+			* 默认值：none
+			* 不继承
+			* none -- 元素不能被用户缩放。 
+			* both -- 允许用户在水平和垂直方向上调整元素的大小
+			* horizontal -- 允许用户在水平方向上调整元素的大小
+			* vertical -- 允许用户在垂直方向上调整元素的大小
+	     （4）box-sizing --
+			* 不继承
+			* border-box -- width/height包含内容/内边距和边框但是不包括外边距。
+			-- width = 内容的宽度，
+			-- height = 内容的高度
+			* content-box -- 默认值width/height只包含内容的宽高。
+			--width = border + padding + 内容的width，
+			--height = border + padding + 内容的height
+	3.4 新增UI样式
+		（1）圆角 -- border-radius
+			* 不继承 
+			* px/%
+			* 最多50%
+			* 顺序：左上，右上，右下，左下
+		（2）边框图片 -- border-image
+			* 不继承
+			* border-image-source: url
+			* border-image-slice: 四个切片值默认100%  fill填充中间
+			* border-image-width: 边框图片的大小
+			* border-image-repeat: stretch（拉伸）/round/repeat（平铺） 单个值的时候，设置所有的边框；或为两个值，分别设置水平与垂直的边框。
+			* border-image-outset: none定义边框图像可超出边框盒的大小，不能为负值
+		（3）背景
+			* css2：
+			    - bg-color：
+				- bg-image：--可设置多个背景，以z轴方向排列，先写的图片会覆盖后面的图片
+				- bg-repeat：
+				- bg-position
+				- bg-attachment-fixed/scroll-fixed是为视口平铺（性能不好）
+			* css3
+				* 默认情况下背景图片是从padding-box开始绘制，从border-box开始剪裁
+				- bg-origin --表示从哪绘制 padding-box/border-box/content-box
+				- bg-clip -- 表示从哪开始裁剪
+				 padding-box/border-box/content-box/text（-webkit中）
+				- bg-size
+				- bg--简写属性-如果需要写的属性多的话，尽量别选简写
+		（4）渐变--background-image下使用必须
+			* 线性渐变--linear-gradient
+				* linear-gradient（角度，to方向，color px/%，color px/%）
+				* 颜色可以叠加多个 
+				* to方向可选 top/right/left/bottom
+				* 角度：单位edg 
+				* repeating-linear-gradient--只重复渐变的那一部分
+				* rgba（0，0，0，0~1）渐变/color渐变
+		     * 径向渐变 -- radial-gradient（）
+			     * （cricle，color px，color px）
+			     * scricle--改变渐变的形状，默认值为ellipse椭圆
+			     * 默认均匀分布
+				     *  radial-gradient(red,blue);
+				 * 不均匀分布
+					 * radial-gradient(red 50%,blue 70%);
+			     * 渐变形状的大小
+			     * radial-gradient(closest-corner  circle ,red,blue)
+				     * closet-side 最近边
+				     * farthest-side 最远边
+				     * closest-corner 最近角
+				     * farthest-corner 最远角  （默认值）
+				 * 改变圆心
+					 *  radial-gradient(closest-corner  circle at 10px 10px,red,blue);
+
+ 
+   
 
    
-     	
+            
+ 
+
+
+ 
+    

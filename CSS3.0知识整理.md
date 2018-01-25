@@ -1,6 +1,6 @@
 #CSS3--知识整合
 ##一、CSS
-	1. css（cascading style sheet）层叠样式表
+	1. css（cascading style sheets）层叠样式表
 	2. css的组成：
 		样式表
 		  *规则
@@ -244,11 +244,35 @@
 				     * farthest-corner 最远角  （默认值）
 				 * 改变圆心
 					 *  radial-gradient(closest-corner  circle at 10px 10px,red,blue);
-			（5）过渡
-			（6）2D变换
-			1.在元素首次渲染还没有完成的情况下,是不会触发过渡的
-			2.在绝大部分变换样式切换时,如果变换函数的位置 个数不相同也不会触发过渡
-
+			（5）过渡 -- transition（执行效率高）
+				* 注意：a：并不是所有的属性都可以设置过渡。例如：d开头的都不行
+				*      b：时间必须带单位
+				* 提供一种在更改css属性时控制动画速度的方法
+				- transition-property -- 需要过渡的属性，默认值为all
+				- transition-duration -- 设置过渡所需的时间，单位s/ms，必须带单位（包括0，当在队列中的时候为0的话会出现错误），指定多个时长，每个时长对应每个属性，若时长个数少于属性个数，那么时长队列会重复，
+				- transition-timing-function：运动的过程--linear（匀速）--ease-in（加速）--ease-in-out（加速然后减速）--cubic-bezier（贝赛尔曲线）
+				- transition-delay--延迟的时间，长度的话同 duration
+				** 当过渡完成时触发一个事件，在符合标准的浏览器下，这个事件是transitionend，每一个拥有过渡的属性再起完成过渡时都会触发一次transitionend事件
+				* 不同属性之间可以连在一块中间用空格隔开
+			# 过渡的天坑
+				* 异步 
+				* transition在元素首次渲染还没结束的情况下是不会触发的
+				
+			（6）2D变换 -transform
+				* rotate-旋转角度 （deg）-- 正表示顺时针，负表示逆时针旋转
+				* translateX/Y-平移  （px）正值表示正向移动，负值表示反向移动，设单值表示只X轴位移
+				* skewX/Y - 倾斜（拉伸） 单位deg
+				* scale - 缩放  中间值1 小于1（缩放），大于1（扩大）
+				* transform-origin 改变基点基点的变换
+				* 矩阵 matrix
+					* 旋转
+					* 平移
+					* 倾斜
+					* 缩放
+				* 用矩阵计算的时候会从右往左计算
+				* 渲染的话从左到右
+			#.在绝大部分变换样式切换时,如果变换函数的位置 个数不相同也不会触发过渡
+	
  
    
 

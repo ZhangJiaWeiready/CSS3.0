@@ -8,7 +8,7 @@
 				*声明
 					*css属性名+css属性值组成的键值对
 	3. 浏览器对css选择器的渲染顺序：从右往左.特点：性能高，算法难度低
-	4. CSS3选择器规范地址：	   https://www.w3.org/TR/2011/REC-css3-selectors-20110929/
+	4. CSS3选择器规范地址：	   https://www.w3.org/TR/2011/REC-css3-selectors-20110929/                    n 
 	   CSS3选择最新选择器规范:  https://www.w3.org/TR/selectors 
 ##二、CSS3.0（level3）
 ## 1.选择器
@@ -81,13 +81,14 @@
 			* ：：firstLine -- 第一行
 			* ：：selection -- 选中的背景
 			* ：：root -- 选中根目录标签
+##
 ##2.CSS声明的优先级
 	2.1. 选择器的特殊性 -- 由选择器本身的组件确定
 	  2.1.1 一个选择器的具体特殊性如下
 		① ID属性值 0 1 0 0
 		② 类属性/属性选择器/伪类 0 0 1 0
 		③ 各个元素/伪元素 0 0 0 1
-  		④ 通配符选择器的特殊性 0 0 0 0 
+		④ 通配符选择器的特殊性 0 0 0 0
 		⑤ 结合符`，`对选择器没有一点贡献
 		⑥ 内联声明的特殊性最强 1 0 0 0 
 		⑦ 继承没有特殊性 (4>7)不如0 0 0 0
@@ -169,10 +170,11 @@
 		（2） 倒影 ---webkit-box-reflect
 			* 不是css3的东西 -webkit内核
 			* 默认值：none
-			* 属性值顺序不能改变
+			！！！属性值顺序不能改变
 			* -webkit-box-reflect：方向 距离 渐变
 			   - 倒影的方向--above（倒上），below（倒下），right（倒右），left（倒左）##倒影在它的什么位置
 			   - 倒影的距离--倒影之间的间距 px/%
+			   - 渐变 linear-gradient
 		（3）resize -- 
 			* 控制一个元素的可调整大小
 			！！！ 一定要配合overflow：auto
@@ -195,6 +197,7 @@
 			* 不继承 
 			* px/%
 			* 最多50%
+			* 左上--右下  右上--左下
 			* 顺序：左上，右上，右下，左下
 		（2）边框图片 -- border-image
 			* 不继承
@@ -208,14 +211,15 @@
 			    - bg-color：
 				- bg-image：--可设置多个背景，以z轴方向排列，先写的图片会覆盖后面的图片
 				- bg-repeat：
-				- bg-position
-				- bg-attachment-fixed/scroll-fixed是为视口平铺（性能不好）
+				- bg-position：控制背景图片在背景区域中的位置
+					- 可% 容器大小减去图片大小/px
+				- bg-attachment-fixed/scroll-fixed是为视口平铺固定在视口上（性能不好）
 			* css3
 				* 默认情况下背景图片是从padding-box开始绘制，从border-box开始剪裁
 				- bg-origin --表示从哪绘制 padding-box/border-box/content-box
 				- bg-clip -- 表示从哪开始裁剪
 				 padding-box/border-box/content-box/text（-webkit中）
-				- bg-size
+				- bg-size -- 图片自适应
 				- bg--简写属性-如果需要写的属性多的话，尽量别选简写
 		（4）渐变--background-image下使用必须
 			* 线性渐变--linear-gradient
@@ -240,6 +244,10 @@
 				     * farthest-corner 最远角  （默认值）
 				 * 改变圆心
 					 *  radial-gradient(closest-corner  circle at 10px 10px,red,blue);
+			（5）过渡
+			（6）2D变换
+			1.在元素首次渲染还没有完成的情况下,是不会触发过渡的
+			2.在绝大部分变换样式切换时,如果变换函数的位置 个数不相同也不会触发过渡
 
  
    
